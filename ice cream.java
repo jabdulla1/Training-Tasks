@@ -9,6 +9,7 @@ printScreen("Welcome to IceCream World Menu\n
 5.Teaberry-----------100\n");
 }
 
+
 class IceCream{
 private String name;
 private int price;
