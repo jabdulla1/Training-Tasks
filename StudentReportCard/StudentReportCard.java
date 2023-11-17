@@ -10,10 +10,10 @@ public class StudentReportCard {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		//Scanner input = new Scanner(System.in);
+		Scanner input = new Scanner(System.in);
 		
 		UserReportCard userReportCard= new UserReportCard();
-		/*
+		
 		System.out.println("Please Enter School Name");
 		userReportCard.setSchoolName(input.nextLine());
 		System.out.println("Please Enter Sudent Name");
@@ -73,7 +73,7 @@ public class StudentReportCard {
 			System.out.println("Enter 'y' To Input Another Score");
 			
 		}while(input.next().equals("y"));
-		*/
+		
 		userReportCard.generateReportCard();
 		
 		System.out.println("Thank You");
