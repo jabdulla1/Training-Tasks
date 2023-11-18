@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head><title></title>
+
+
+    <script>
+
+        function validationForm(){
+            let name = document.forms["myForm"]["fname"].value;
+            var ok = false;
+            
+            if(name ==""){
+                alert("Name must be filled out");
+                ok = false;
+            }
+
+            const emailpattern =/^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/;
+            let email = document.forms["myForm"]["email"].value;
+
+            console.log(email);
+            console.log(emailpattern.test(email));
+
+            if(!emailpattern.test(email)){
+                alert("Must be a vaild email address");
+                ok = false;
+            }
+
+            let password = document.forms["myForm"]["password"].value; 
+
+            if(password.length<8){
+                alert("Password Must have a lest 8 characters");
+                ok= false;
+            }          
+
+            const pwdAtLestOnelower=/[a-z]/g;
+
+            if(!pwdAtLestOnelower.test(password)){
+                alert("Password Must have a lest one lowercase letter");
+                ok= false;
+            }
+
+            const pwdAtLestOneupper=/[A-Z]/g;
+          
+            if(!pwdAtLestOneupper.test(password)){
+                alert("Password Must have a lest one uppercase letter");
+                ok= false;                
+            }
+
+            const pwdAtleastOneSpeChar=/[\!\@\#\$\%\^\&\*\(\)\-\+\=\{\}\\\|\:\;"\'\<\>\,\.\?\`\~]/g;
+            
+            if(!pwdAtleastOneSpeChar.test(password)){
+                alert("Password Must have a lest one special characters");
+                ok= false;
+            }
+
+            let contactNumber = document.forms["myForm"]["contactNumber"].value;
+            const contactNumPattern =/[0-9]{10}/g;
+            if(!contactNumPattern.test(contactNumber)){
+                alert("Contact Number Must Be 10 Digits");
+                ok= false;
+            }
+
+            return ok;
+        }
+        
+    </script>
+</head>
+
+<body>
+    <div style="width: 27% ;">
+<h2>JavaScript Validation</h2>
+<form name="myForm" onsubmit="return validationForm()" method="post">
+    <fieldset>
+
+        <legend>Registration Form</legend>
+    
+    <div>
+        Name: <input type="text" name="fname" required> 
+    </div><br>
+    <div>
+        Email:
+        <input
+          type="text"
+          name="email"
+          required
+        />
+        
+      </div><br>
+
+      <div>
+        Password:
+        <input
+          type="password"
+          name="password"
+          required
+        />
+        
+      </div><br>
+
+      <div>
+        Contact Number:
+        <input
+          type="text"
+          name="contactNumber"
+          required
+        />
+        
+      </div><br>
+
+      <div>
+        <button type="submit" style="width: 350px;">Submit</button>
+      </div>
+      </fieldset>
+    </form>
+  </div>
+</form>
+</div>
+</body>
+
+</html>
