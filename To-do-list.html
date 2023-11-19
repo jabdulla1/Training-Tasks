@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head><title></title>
+
+<style>
+  
+</style>
+</head>
+
+<body>
+    <div>
+    <h1 style="margin-left: 35%;">Welcome to Your TODO List</h1>
+    <input id="task" type="text">
+
+    <button id="add" onclick="addTask()">Add Task</button>
+    <button id="clear" onclick="clearTable()">Clear the Completed Tasks</button><br>
+    <label><b>Filter Your List</b></label>
+    <label>
+        <input type="radio" name="filter" value="all" onclick="filterTable('all')" checked> All
+      </label>
+      <label>
+        <input type="radio" name="filter" value="active" onclick="filterTable('active')"> Active
+      </label>
+      <label>
+        <input type="radio" name="filter" value="completed" onclick="filterTable('completed')"> Completed
+      </label>
+
+    <table id="toDoList" border="2" width="100%">
+        <thead>
+        <tr>
+            <th style="font-size:30px">Task</th>
+            <th style="font-size:30px">Action</th>
+            
+        </tr>
+    </thead>
+    <tbody id = "TableBody" style="font-size: 30px;">
+        <tr>
+            
+        </tr>
+    </tbody>
+        
+    </table>
+    <script>
+function handleDoneButtonClick(button){
+    button.innerHTML= "Completed";
+
+    let row = button.closest("tr");
+    row.style.backgroundColor = 'rgb(144, 238, 144)';
+    row = button.closest("td");
+    row.style.backgroundColor = 'rgb(255, 255, 255)';
+   
+    //const taskTable = JSON.stringify(document.getElementById('TableBody'));
+    //sessionStorage.setItem("taskTableBody", taskTable);
+    //save();
+}
+function handleDeleteButtonClick(button) {
+    
+        if(confirm("Are You Sure")){
+            //let row= button.parentNode.parentNode.rowIndex;
+            let row= button.parentNode.parentNode.rowIndex-1;
+            
+            document.getElementById("TableBody").deleteRow(row);
+
+            //const taskTable = JSON.stringify(document.getElementById('TableBody'));
+            //sessionStorage.setItem("taskTableBody", taskTable);
+            //save();
+        }
+
+    }
+
+function addRow(task){
+    
+    //Append this onto my table, 
+    let tableBody = document.getElementById("TableBody");
+    //let tableBody = JSON.parse(sessionStorage.getItem("taskTableBody"));
+    //Creating a table row
+    let tableRow = document.createElement("tr");
+
+    //Create the columns
+    let RNumberColumn = document.createElement("td");
+    let ENumberColumn = document.createElement("td");
+    let DoneButton = document.createElement("button");
+    let DeleteButton = document.createElement("button");
+    
+    DoneButton.style.width = '300px';
+    DoneButton.style.height = '100px';
+    DoneButton.innerHTML="Active";
+    DoneButton.onclick= function(){
+        handleDoneButtonClick(this);
+    }
+
+
+     DeleteButton.style.width = '300px';
+     DeleteButton.style.height = '100px';
+     DeleteButton.innerHTML = "Delete";
+     DeleteButton.onclick = function () {
+            handleDeleteButtonClick(this);
+        };
+    
+     
+    RNumberColumn.innerText = task;
+    ENumberColumn.appendChild(DoneButton);
+    ENumberColumn.appendChild(DeleteButton);
+    
+    
+    //attach the columns to our newly created row 
+    tableRow.appendChild(RNumberColumn );
+    tableRow.appendChild(ENumberColumn);
+    
+    //attach the row itself to the table
+    tableBody.appendChild(tableRow);
+
+ }
+
+        function addTask(){
+
+            //let taskTable = document.getElementById('TableBody');
+            //sessionStorage.setItem("taskTableBody", taskTable);
+
+            let task= document.getElementById("task").value;
+           
+            if((task.trim() != "" )){ 
+              
+                addRow(task);
+            }
+            clearTask=document.getElementById("task");
+            clearTask.value="";
+
+            //taskTable = JSON.stringify(document.getElementById('TableBody'));
+            //sessionStorage.setItem("taskTableBody", taskTable);
+            //save();
+        }
+
+        function clearTable(){
+
+            removeGreenRows();
+            //const taskTable = JSON.stringify(document.getElementById('TableBody'));
+            //sessionStorage.setItem("taskTableBody", taskTable);
+            //save();
+        }
+
+        function removeGreenRows() {
+  const taskTable = document.getElementById('TableBody');
+  //const taskTable = JSON.parse(sessionStorage.getItem("taskTableBody"));
+  const rows = taskTable.rows;
+
+ for (let i = rows.length - 1; i > 0; i--) { // Start from the last row to avoid index issues
+    const backgroundColor = getComputedStyle(rows[i]).backgroundColor;
+
+    if (backgroundColor === 'rgb(144, 238, 144)') { // Check for green color
+      taskTable.deleteRow(rows[i].rowIndex-1);
+    }
+  }
+}
+
+function filterTable(filterValue) {
+    const taskTable = document.getElementById('TableBody');
+    const rows = taskTable.rows;
+
+    for (let i = rows.length - 1; i > 0; i--) { 
+    
+        const backgroundColor = getComputedStyle(rows[i]).backgroundColor;
+
+    if((filterValue == "completed") && (backgroundColor === 'rgb(144, 238, 144)') ){
+        rows[i].style.display = '';
+    }
+    else if(filterValue == "all"){
+        rows[i].style.display = '';
+    }
+    else if((filterValue == "active") && (backgroundColor == 'rgba(0, 0, 0, 0)') ){
+        
+        rows[i].style.display = '';
+    }
+    else{
+        rows[i].style.display = 'none';
+    }
+
+  }
+}
+
+function save(){
+    var table = document.getElementById('TableBody');
+var tableData = [];
+
+for (var i = 1, row; row = table.rows[i]; i++) {
+    var rowData = [];
+    for (var j = 0, col; col = row.cells[j]; j++) {
+        var cellData = {
+            text: col.innerText,
+            bgColor: col.style.backgroundColor
+        };
+
+        // Check if buttons are present in the cell
+        var buttons = [];
+        var buttonElements = col.getElementsByTagName('button');
+        for (var k = 0; k < buttonElements.length; k++) {
+            var buttonInfo = {
+                label: buttonElements[k].innerHTML,
+                action: buttonElements[k].getAttribute('data-action') // Use data-action attribute to store the button action
+            };
+            buttons.push(buttonInfo);
+        }
+
+        if (buttons.length > 0) {
+            cellData.buttons = buttons;
+        }
+
+        rowData.push(cellData);
+    }
+    tableData.push(rowData);
+}
+
+sessionStorage.setItem('tableData', JSON.stringify(tableData));
+
+}
+
+function getTableData(){
+    var storedData = sessionStorage.getItem('tableData');
+var tableData = JSON.parse(storedData);
+
+var table = document.getElementById('TableBody');
+
+for (var i = 0; i < tableData.length; i++) {
+    var row = table.insertRow(i);
+    for (var j = 0; j < tableData[i].length; j++) {
+        var cell = row.insertCell(j);
+
+        cell.innerHTML = tableData[i][j].text;
+        cell.style.backgroundColor = tableData[i][j].bgColor;
+
+    
+        if (tableData[i][j].buttons) {
+            for (var k = 0; k < tableData[i][j].buttons.length; k++) {
+                var button = document.createElement('button');
+                button.innerHTML = tableData[i][j].buttons[k].label;
+                button.onclick = function () {
+                    if(button.innerHTML == "Active"){
+                        handleDoneButtonClick(button)
+                    }
+                    else if(button.innerHTML == "Delete"){
+                        handleDeleteButtonClick(button)
+                    }
+                };
+
+                // Append the button to the cell
+                cell.appendChild(button);
+            }
+        }
+    }
+}
+
+}
+
+/*
+window.onload = function() {
+//document.onload=function(){
+    //  sessionStorage.setItem("lastname", "Smith");
+    getTableData();
+    //var taskTableBody =  sessionStorage.getItem("taskTableBody");//document.getElementById('TableBody');
+}
+*/
+    </script>
+    </div>
+</body>
+
+</html>
