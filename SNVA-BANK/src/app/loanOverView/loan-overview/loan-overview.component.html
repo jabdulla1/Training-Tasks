@@ -1,0 +1,41 @@
+
+<div>
+
+
+<div ></div>
+<p class="mx-auto h5" style="width: 300px;"><u>Loan Structure Characteristics</u></p>
+    While this is not an exhaustive list, important considerations around loan structure include the following:
+   <!-- <ul>
+    <li>loan amount, which is generally a function of the loan-to-value (LTV).</li>
+    <li>interest rate, as well as whether it should be a fixed rate or a variable (floating) rate.</li>
+    <li>Is it operating (revolving) credit, or will the loan be structured as term financing?</li>
+    <li>Will the loan be reducing (amortizing), or will it be interest-only? If reducing, will the payments be periodic, or will it be structured as a “bullet” repayment?</li>
+    <li>Is the loan secured or unsecured?</li>
+    <li>Will security charges be first ranking (senior), or will the loan be “subordinated” (i.e., first vs. second mortgage) behind another loan or lender?</li>
+    <li>How frequently will the borrower be expected to provide financial reporting to the lender, and what quality should that reporting be (i.e., review engagement, audit engagement, etc.)?</li>
+    <li>Will there be any specific financial or non-financial loan covenants that the borrower must comply with?</li>
+    <li>Will there be any type of secondary (indirect) security taken (ie. government guarantee programs, personal guarantees by owners, etc.)?</li>
+    </ul> 
+this.loanOver.LoanAmount =100000;
+    this.loanOver.IntrestRate = .10;
+    this.loanOver.IsIntrestRateFloated = true;
+    this.loanOver.Credit= 740;
+    this.loanOver.IsReducingOfIntreast= true;
+    this.loanOver.PayBackDate=new Date("2025-01-16"); 
+    this.loanOver.IsPayBackPeriodicOrStrucured= true;
+    this.loanOver.IsPayBackSecruedOrUnsecrued= true;
+    this.loanOver.IsSecurityCharRankingOrSubordinated= true;
+    this.loanOver.AreThereLoansConvants= true; 
+-->
+    <ul  class="list-group list-group-flush">
+        <li class="list-group-item">Loan Amount: ${{loanOver.LoanAmount}}</li>
+        <li class="list-group-item">Loan Interest Rate: {{loanOver.IntrestRate}}%</li>
+        <li class="list-group-item">Is The Interest Rate Floated: {{isFloated}}</li>
+        <li class="list-group-item">Your Credit Score: {{loanOver.Credit}}</li>
+        <li class="list-group-item">Is Your Loan's Interest Reducing: {{isReducing}}</li>
+        <li class="list-group-item">When Is Your Loan Pay Back Date: {{loanOver.PayBackDate}}</li>
+        <li class="list-group-item">Is Your Pay Back Period Periodic Or Structured: {{isPeriodicOrStrucured}}</li>
+        <li class="list-group-item">Is Your Pay Back Secrued Or Unsecured: {{isSecruedOrUnsecured}}</li>
+        <li class="list-group-item">Is Security Charges be first ranking (senior), or “subordinated”: {{isChargesFristOrSubordinated}}</li>
+    </ul>
+</div>

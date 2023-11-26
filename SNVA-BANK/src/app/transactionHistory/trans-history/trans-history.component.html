@@ -1,0 +1,69 @@
+<div style="margin-top: 30px;">
+
+</div>
+<!-- Flexbox container for aligning the toasts
+<div aria-live="polite" aria-atomic="true"> -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <!-- Then put toasts within -->
+    <div id="liveToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="me-auto">Banking App</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body text-danger fs-4">
+       Acount Balance Is low: $ {{AvailableBalance}}
+       <div class="mt-2 pt-2 border-top">
+        <button type="button" class="btn btn-secondary btn-sm mx-auto" style="width: 300px;" data-bs-dismiss="toast">Close</button>
+      </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<div class="h5">AvailableBalance: ${{AvailableBalance}}</div>
+<div class="mx-auto h2" style="width: 300px;">
+Transaction History</div>
+<div>
+    <!--<p>Posting Date | Description | Type | Amount | Available Balance</p>-->
+
+    <table class="table table-striped" style="width: 100%;">
+        <thead>
+        <tr> 
+          <th>Posting Date</th>
+          <th>Description</th>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Available Balance</th>
+        </tr>
+    </thead>
+        <!--
+            /*
+        public Id: number,
+        public UserData: User, 
+        public PostingDate: Date,
+        public Description: string,
+        public Type: string,
+        public Amount: number,
+        public AvailableBal: number
+
+        id: number,
+        userEmail: string,
+        userPassword: string
+*/ 
+    -->
+    <tbody>
+        <tr *ngFor="let transHistory of paginatedData let index = index"> 
+          <td>{{transHistory.PostingDate}}</td>
+          <td>{{transHistory.Description}}</td>
+          <td>{{transHistory.Type}}</td>
+          <td>$ {{transHistory.Amount}}</td>
+          <td>$ {{transHistory.AvailableBal}}</td>
+        </tr>
+    </tbody>
+      </table>
+      <div class="mx-auto" style="width: 300px;">
+      <app-pagination [totalItems]= "TableData.length" [itemsPerPage]="5" [currentPage]="currentPage"
+      (onClick)="changePage($event)"></app-pagination>
+    </div>
+</div>
