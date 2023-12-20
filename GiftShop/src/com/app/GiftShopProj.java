@@ -22,7 +22,6 @@ public class GiftShopProj {
 		IPrintReceipt iPrintReceipt = new PrintReceipt();
 				
 		shop.setItems(iGiftShopeInput.GetGiftShopInput(shop.getItems()));
-		
 		iPrintReceipt.PrintOutReceipt((GiftShop) shop);
 		
 
