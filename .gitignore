@@ -10,7 +10,7 @@ buildNumber.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
 
-*. class
+*.class
 
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
